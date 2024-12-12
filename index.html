@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Space Facts Generator ✨</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #0b0b2d, #1a237e, #311b92);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 20px;
+        }
+
+        h1 {
+            color: #00ffff;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        #fact-display {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin: 30px 0;
+            min-height: 120px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .category {
+            color: #00ffff;
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-transform: capitalize;
+        }
+
+        button {
+            background: linear-gradient(45deg, #00ffff, #00bfff);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: #000;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .stars {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 20px white;
+            animation: twinkle 1s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Space Facts Generator 🌟</h1>
+        <div id="fact-display">Click the button to discover amazing space facts!</div>
+        <div id="category" class="category"></div>
+        <button onclick="generateFact()">✨ Generate Fact ✨</button>
+    </div>
+
+    <script>
+        // Your existing JavaScript code remains the same
+        const spaceFacts = {
+            "space_facts": [
+                {
+                    "id": 1,
+                    "fact": "The Apollo 11 guidance computer had only 4KB of RAM and 72KB of ROM, less memory than a modern calculator",
+                    "category": "space_technology"
+                },
+                // Add all your space facts here
+            ]
+        };
+
+        function generateFact() {
+            const factDisplay = document.getElementById('fact-display');
+            const categoryDisplay = document.getElementById('category');
+            
+            const randomIndex = Math.floor(Math.random() * spaceFacts.space_facts.length);
+            const randomFact = spaceFacts.space_facts[randomIndex];
+            
+            factDisplay.style.opacity = 0;
+            setTimeout(() => {
+                factDisplay.textContent = randomFact.fact;
+                categoryDisplay.textContent = `Category: ${randomFact.category.replace('_', ' ')}`;
+                factDisplay.style.opacity = 1;
+            }, 200);
+        }
+
+        document.getElementById('fact-display').style.transition = 'opacity 0.3s ease-in-out';
+
+        // Add animated stars
+        for(let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'stars';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            document.body.appendChild(star);
+        }
+    </script>
+</body>
+</html>
